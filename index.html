@@ -421,7 +421,13 @@
                 <label>Total</label>
                 <input type="text" name="total" placeholder="Ex: 02">
             </div>
-
+	    <div class="campo">
+                <label>Tipo de Contratação</label>
+                <select name="tipo">
+                <option value="bens">Bens</option>
+                <option value="servicos">Serviços</option>
+              </select>
+          </div>
             <div class="duas-colunas" style="margin-top:8px;">
                 <div class="campo">
                     <label>Data (por extenso)</label>
@@ -436,6 +442,7 @@
                 <label>Cargo (para assinatura)</label>
                 <input type="text" name="cargo" value="Ex: Diretor Administrativo">
             </div>
+	    
 
             <div class="botoes">
                 <button type="button" class="btn btn-gerar" onclick="gerarDoc('tr')">Gerar TR</button>
