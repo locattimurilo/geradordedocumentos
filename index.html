@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Documentos Administrativos</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzip/3.1.4/pizzip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.42.1/docxtemplater.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <style>
+        :root {
+            --azul: #0275C5;
+            --azul-escuro: #015ea0;
+            --fundo: #f3f6fb;
+            --borda: #e4e8ef;
+            --texto: #2c2f36;
+            --cinza: #6b7280;
+            --verde: #1e8e3e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: var(--fundo);
+            color: var(--texto);
+        }
+
+        .cabecalho {
+            background: var(--azul);
+            padding: 22px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cabecalho h1 {
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        h2.titulo {
+            max-width: 1100px;
+            margin: 30px auto 10px;
+            padding: 0 20px;
+            font-size: 26px;
+            color: var(--azul);
+            font-weight: 500;
+        }
+
+        .card {
+            max-width: 1100px;
+            margin: 20px auto 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--azul);
+            color: white;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .abas {
+            display: flex;
+            border-bottom: 1px solid var(--borda);
+            background: #fff;
+        }
+
+        .aba {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--cinza);
+            border-bottom: 3px solid transparent;
+            font-size: 15px;
+        }
+
+        .aba.ativa {
+            border-bottom-color: var(--azul);
+            color: var(--azul);
+        }
+
+        .painel { display: none; padding: 25px; }
+        .painel.ativo { display: block; }
+
+        .sub-titulo {
+            color: var(--azul);
+            font-size: 17px;
+            margin: 20px 0 15px;
+            font-weight: 600;
+        }
+
+        .campo { margin-bottom: 18px; }
+
+        .campo label {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--cinza);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .campo input,
+        .campo textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--borda);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fff;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .campo input:focus,
+        .campo textarea:focus {
+            border-color: var(--azul);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(2,117,197,0.12);
+        }
+
+        .duas-colunas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .upload-linha {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #eaf3fb;
+            border: 1px dashed var(--azul);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+        }
+
+        .upload-linha label {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--azul);
+            white-space: nowrap;
+        }
+
+        .upload-linha input[type=file] {
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .upload-status {
+            font-size: 13px;
+            color: var(--cinza);
+            white-space: nowrap;
+        }
+
+        .upload-status.ok {
+            color: var(--verde);
+            font-weight: 600;
+        }
+
+        .botoes {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 11px 26px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-gerar { background: var(--azul); color: white; }
+        .btn-gerar:hover { background: var(--azul-escuro); }
+
+        .btn-limpar { background: #d1d5db; color: #111; }
+        .btn-limpar:hover { background: #b8bec7; }
+
+        .loading {
+            display: none;
+            color: var(--azul);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .erro-template {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        footer {
+            background: var(--azul);
+            color: rgba(255,255,255,0.75);
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 13px;
+            margin-top: 40px;
+            line-height: 1.7;
+        }
+
+        footer p + p {
+            margin-top: 4px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.45);
+        }
+    </style>
+</head>
+<body>
+
+<div class="cabecalho">
+    <h1>Gerador de Documentos Administrativos</h1>
+</div>
+
+<h2 class="titulo">Gerador de Documentos</h2>
+
+<div class="card">
+    <div class="card-header">Escolha o tipo</div>
+
+    <div class="abas">
+        <button class="aba ativa" onclick="mudarAba(event, 'dfd')">DFD</button>
+        <button class="aba" onclick="mudarAba(event, 'etp')">ETP</button>
+        <button class="aba" onclick="mudarAba(event, 'tr')">TERMO DE REF.</button>
+    </div>
+
+    <!-- DFD -->
+    <div id="dfd" class="painel ativo">
+        <div id="erro-dfd" class="erro-template">Não foi possível carregar o template DFD automaticamente. Selecione o arquivo abaixo.</div>
+
+        <div class="upload-linha">
+            <label for="file-dfd">📄 Template DFD:</label>
+            <input type="file" id="file-dfd" accept=".docx" onchange="lidarArquivo('dfd')">
+            <span id="status-dfd" class="upload-status">Nenhum arquivo selecionado</span>
+        </div>
+
+        <form id="form-dfd">
+            <div class="sub-titulo">Documento de Formalização da Demanda</div>
+            <div class="campo">
+                <label>Agente Responsável</label>
+                <input type="text" name="agente" placeholder="Ex: Américo Talarico Junior" required>
+            </div>
+            <div class="campo">
+                <label>Setor Requisitante</label>
+                <input type="text" name="setor" placeholder="Ex: Diretoria Administrativa" required>
+            </div>
+            <div class="campo">
+                <label>Nº do Processo Administrativo</label>
+                <input type="text" name="processo" placeholder="Ex: 2026/00001" required>
+            </div>
+            <div class="campo">
+                <label>Objeto da Contratação</label>
+                <textarea name="objeto" rows="3" placeholder="Descreva o objeto..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Justificativa</label>
+                <textarea name="justificativa" rows="4" placeholder="Justifique a necessidade..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Especificações do Objeto</label>
+                <textarea name="especificacoes" rows="4" placeholder="Detalhamento técnico..."></textarea>
+            </div>
+            <div class="duas-colunas">
+                <div class="campo">
+                    <label>Data (por extenso)</label>
+                    <input type="text" name="data" placeholder="São Carlos, 29 de janeiro de 2026">
+                </div>
+                <div class="campo">
+                    <label>Cargo (para assinatura)</label>
+                    <input type="text" name="cargo" value="Diretor Administrativo">
+                </div>
+            </div>
+            <p style="font-size:12px; color:#999;">* Setor e agente serão usados na assinatura.</p>
+
+            <div class="botoes">
+                <button type="button" class="btn btn-gerar" onclick="gerarDoc('dfd')">Gerar DFD</button>
+                <button type="reset" class="btn btn-limpar">Limpar</button>
+                <span id="load-dfd" class="loading">Processando...</span>
+            </div>
+        </form>
+    </div>
+
+    <!-- ETP -->
+    <div id="etp" class="painel">
+        <div id="erro-etp" class="erro-template">Não foi possível carregar o template ETP automaticamente. Selecione o arquivo abaixo.</div>
+
+        <div class="upload-linha">
+            <label for="file-etp">📄 Template ETP:</label>
+            <input type="file" id="file-etp" accept=".docx" onchange="lidarArquivo('etp')">
+            <span id="status-etp" class="upload-status">Nenhum arquivo selecionado</span>
+        </div>
+
+        <form id="form-etp">
+            <div class="sub-titulo">Estudo Técnico Preliminar</div>
+            <div class="campo">
+                <label>Introdução</label>
+                <textarea name="introducao" rows="3" placeholder="Contexto e objetivos..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Objeto da Contratação</label>
+                <textarea name="objeto" rows="3" placeholder="Descreva o objeto..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Justificativa</label>
+                <textarea name="justificativa" rows="4" placeholder="Por que contratar?"></textarea>
+            </div>
+            <div class="campo">
+                <label>Requisitos Técnicos</label>
+                <textarea name="requisitos" rows="4" placeholder="Ex: normas, certificações..."></textarea>
+            </div>
+            <div class="duas-colunas">
+                <div class="campo">
+                    <label>Valor Estimado (R$)</label>
+                    <input type="text" name="valor_estimado" placeholder="Ex: 15000,00">
+                </div>
+                <div class="campo">
+                    <label>Prazo de Execução</label>
+                    <input type="text" name="prazo_execucao" placeholder="Ex: 30 dias">
+                </div>
+            </div>
+            <div class="duas-colunas">
+                <div class="campo">
+                    <label>Data (por extenso)</label>
+                    <input type="text" name="data" placeholder="São Carlos, 29 de janeiro de 2026">
+                </div>
+                <div class="campo">
+                    <label>Agente Responsável</label>
+                    <input type="text" name="agente" placeholder="Nome do responsável">
+                </div>
+            </div>
+
+            <div class="botoes">
+                <button type="button" class="btn btn-gerar" onclick="gerarDoc('etp')">Gerar ETP</button>
+                <button type="reset" class="btn btn-limpar">Limpar</button>
+                <span id="load-etp" class="loading">Processando...</span>
+            </div>
+        </form>
+    </div>
+
+    <!-- TR -->
+    <div id="tr" class="painel">
+        <div id="erro-tr" class="erro-template">Não foi possível carregar o template TR automaticamente. Selecione o arquivo abaixo.</div>
+
+        <div class="upload-linha">
+            <label for="file-tr">📄 Template TR:</label>
+            <input type="file" id="file-tr" accept=".docx" onchange="lidarArquivo('tr')">
+            <span id="status-tr" class="upload-status">Nenhum arquivo selecionado</span>
+        </div>
+
+        <form id="form-tr">
+            <div class="sub-titulo">Termo de Referência</div>
+            <div class="campo">
+                <label>Objeto Detalhado</label>
+                <textarea name="objeto" rows="4" placeholder="Descreva detalhadamente..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Endereço de Execução</label>
+                <input type="text" name="endereco" placeholder="Rua Major José Inácio, 2154">
+            </div>
+            <div class="duas-colunas">
+                <div class="campo">
+                    <label>Valor em Risco (R$)</label>
+                    <input type="text" name="valor_risco" placeholder="Ex: 2000000,00">
+                </div>
+                <div class="campo">
+                    <label>Vigência</label>
+                    <input type="text" name="vigencia" placeholder="Ex: 12 meses">
+                </div>
+            </div>
+            <div class="campo">
+                <label>Coberturas</label>
+                <textarea name="coberturas" rows="3" placeholder="Descreva as coberturas..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Requisitos Específicos</label>
+                <textarea name="requisitos" rows="3" placeholder="Ex: garantias, condições..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Critérios de Aceitação</label>
+                <textarea name="criterios" rows="3" placeholder="Como será aceito o serviço?"></textarea>
+            </div>
+            <div class="duas-colunas">
+                <div class="campo">
+                    <label>Data (por extenso)</label>
+                    <input type="text" name="data" placeholder="São Carlos, 29 de janeiro de 2026">
+                </div>
+                <div class="campo">
+                    <label>Agente Responsável</label>
+                    <input type="text" name="agente" placeholder="Nome do responsável">
+                </div>
+            </div>
+
+            <div class="botoes">
+                <button type="button" class="btn btn-gerar" onclick="gerarDoc('tr')">Gerar TR</button>
+                <button type="reset" class="btn btn-limpar">Limpar</button>
+                <span id="load-tr" class="loading">Processando...</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>Este projeto foi desenvolvido de forma independente, para fins de estudo e automação de rotinas administrativas.</p>
+    <p>Não representa sistema oficial de nenhum órgão do poder público.</p>
+</footer>
+
+<script>
+    // guarda os binários dos templates carregados
+    var templates = { dfd: null, etp: null, tr: null };
+    var carregados = { dfd: false, etp: false, tr: false };
+
+    // mapeamento campo do form -> placeholder no docx
+    var campos = {
+        dfd: {
+            agente: 'agente', setor: 'setor', processo: 'processo',
+            objeto: 'objeto', justificativa: 'justificativa',
+            especificacoes: 'especificações', data: 'data', cargo: 'cargo'
+        },
+        etp: {
+            introducao: 'introducao', objeto: 'objeto', justificativa: 'justificativa',
+            requisitos: 'requisitos', valor_estimado: 'valor-estimado',
+            prazo_execucao: 'prazo-execucao', data: 'data', agente: 'agente'
+        },
+        tr: {
+            objeto: 'objeto', endereco: 'endereco', valor_risco: 'valor-risco',
+            vigencia: 'vigencia', coberturas: 'coberturas', requisitos: 'requisitos',
+            criterios: 'criterios', data: 'data', agente: 'agente'
+        }
+    };
+
+    function mudarAba(ev, aba) {
+        document.querySelectorAll('.painel').forEach(p => p.classList.remove('ativo'));
+        document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
+        document.getElementById(aba).classList.add('ativo');
+        ev.currentTarget.classList.add('ativa');
+    }
+
+    function lidarArquivo(tipo) {
+        var arquivo = document.getElementById('file-' + tipo).files[0];
+        if (!arquivo) return;
+
+        var leitor = new FileReader();
+        leitor.onload = function(e) {
+            templates[tipo] = e.target.result;
+            carregados[tipo] = true;
+
+            var span = document.getElementById('status-' + tipo);
+            span.textContent = '✅ ' + arquivo.name;
+            span.classList.add('ok');
+            document.getElementById('erro-' + tipo).style.display = 'none';
+        };
+        leitor.readAsArrayBuffer(arquivo);
+    }
+
+    // tenta buscar o template da pasta /templates automaticamente (só funciona em http://)
+    async function carregarTemplate(tipo, caminho) {
+        try {
+            var r = await fetch(caminho);
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+
+            templates[tipo] = await r.arrayBuffer();
+            carregados[tipo] = true;
+
+            document.getElementById('erro-' + tipo).style.display = 'none';
+            var span = document.getElementById('status-' + tipo);
+            span.textContent = '✅ ' + tipo.toUpperCase() + '.docx (automático)';
+            span.classList.add('ok');
+        } catch(e) {
+            // falhou, provavelmente rodando em file:// — sem problema, usuário seleciona manualmente
+            document.getElementById('erro-' + tipo).style.display = 'block';
+        }
+    }
+
+    window.addEventListener('load', function() {
+        carregarTemplate('dfd', 'templates/DFD.docx');
+        carregarTemplate('etp', 'templates/ETP.docx');
+        carregarTemplate('tr',  'templates/TR.docx');
+    });
+
+    function baixarBlob(blob, nome) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = nome;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    async function gerarDoc(tipo) {
+        var PizZipLib = window.PizZip || (typeof PizZip !== 'undefined' ? PizZip : null);
+
+        if (!PizZipLib) {
+            alert('PizZip não carregou. Tenta recarregar a página.');
+            return;
+        }
+
+        if (!carregados[tipo]) {
+            alert('Seleciona o arquivo .docx do template ' + tipo.toUpperCase() + ' primeiro.');
+            return;
+        }
+
+        var loader = document.getElementById('load-' + tipo);
+        loader.style.display = 'inline';
+
+        try {
+            var formData = Object.fromEntries(new FormData(document.getElementById('form-' + tipo)));
+
+            // monta o objeto que vai pro template
+            var dados = {};
+            for (var campo in campos[tipo]) {
+                dados[campos[tipo][campo]] = formData[campo] || '';
+            }
+
+            var zip = new PizZipLib(templates[tipo]);
+            var doc = new window.docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+            doc.render(dados);
+
+            var blob = doc.getZip().generate({
+                type: 'blob',
+                mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            });
+
+            if (!blob || blob.size === 0) throw new Error('O documento gerado ficou vazio.');
+
+            var nomeArquivo = tipo.toUpperCase() + '_' + new Date().toISOString().slice(0, 10) + '.docx';
+
+            if (typeof saveAs === 'function') {
+                saveAs(blob, nomeArquivo);
+            } else if ('showSaveFilePicker' in window) {
+                try {
+                    var handle = await window.showSaveFilePicker({
+                        suggestedName: nomeArquivo,
+                        types: [{ description: 'Word', accept: { 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'] } }]
+                    });
+                    var w = await handle.createWritable();
+                    await w.write(blob);
+                    await w.close();
+                } catch(err) {
+                    if (err.name !== 'AbortError') baixarBlob(blob, nomeArquivo);
+                }
+            } else {
+                baixarBlob(blob, nomeArquivo);
+            }
+
+        } catch(e) {
+            console.error(e);
+            alert('Erro ao gerar o documento: ' + e.message);
+        } finally {
+            loader.style.display = 'none';
+        }
+    }
+</script>
+
+<!-- templates ficam em /templates/DFD.docx, ETP.docx, TR.docx -->
+</body>
+</html>
