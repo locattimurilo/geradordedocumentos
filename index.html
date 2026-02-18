@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Documentos Administrativos</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzip/3.1.4/pizzip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.42.1/docxtemplater.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pizzip@3.1.4/dist/pizzip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docxtemplater@3.42.1/build/docxtemplater.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 
     <style>
         :root {
@@ -241,7 +241,7 @@
     <div class="abas">
         <button class="aba ativa" onclick="mudarAba(event, 'dfd')">DFD</button>
         <button class="aba" onclick="mudarAba(event, 'etp')">ETP</button>
-        <button class="aba" onclick="mudarAba(event, 'tr')">TERMO DE REFERÊNCIA</button>
+        <button class="aba" onclick="mudarAba(event, 'tr')">TERMO DE REF.</button>
     </div>
 
     <!-- DFD -->
@@ -258,7 +258,7 @@
             <div class="sub-titulo">Documento de Formalização da Demanda</div>
             <div class="campo">
                 <label>Agente Responsável</label>
-                <input type="text" name="agente" placeholder="Ex: Nome Completo de quem solicitou" required>
+                <input type="text" name="agente" placeholder="Ex: Américo Talarico Junior" required>
             </div>
             <div class="campo">
                 <label>Setor Requisitante</label>
@@ -492,9 +492,9 @@
     }
 
     window.addEventListener('load', function() {
-        carregarTemplate('dfd', 'templates/DFD.docx');
-        carregarTemplate('etp', 'templates/ETP.docx');
-        carregarTemplate('tr',  'templates/TR.docx');
+        carregarTemplate('dfd', 'https://raw.githubusercontent.com/locattimurilo/geradordedocumentos/main/templates/DFD.docx');
+        carregarTemplate('etp', 'https://raw.githubusercontent.com/locattimurilo/geradordedocumentos/main/templates/ETP.docx');
+        carregarTemplate('tr',  'https://raw.githubusercontent.com/locattimurilo/geradordedocumentos/main/templates/TR.docx');
     });
 
     function baixarBlob(blob, nome) {
