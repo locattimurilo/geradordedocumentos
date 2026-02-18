@@ -137,6 +137,12 @@
             gap: 20px;
         }
 
+        .tres-colunas {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 20px;
+        }
+
         .upload-linha {
             display: flex;
             align-items: center;
@@ -258,7 +264,7 @@
             <div class="sub-titulo">Documento de Formalização da Demanda</div>
             <div class="campo">
                 <label>Agente Responsável</label>
-                <input type="text" name="agente" placeholder="NOME COMPLETO DE QUEM SOLICITOU" required>
+                <input type="text" name="agente" placeholder="Ex: Américo Talarico Junior" required>
             </div>
             <div class="campo">
                 <label>Setor Requisitante</label>
@@ -369,45 +375,66 @@
 
         <form id="form-tr">
             <div class="sub-titulo">Termo de Referência</div>
+
             <div class="campo">
-                <label>Objeto Detalhado</label>
-                <textarea name="objeto" rows="4" placeholder="Descreva detalhadamente..."></textarea>
+                <label>Resumo da Contratação (item 1.1)</label>
+                <textarea name="resumo_contratacao" rows="3" placeholder="Ex: Aquisição de 02 registros tipo gaveta de 3 polegadas..."></textarea>
             </div>
+
             <div class="campo">
-                <label>Endereço de Execução</label>
-                <input type="text" name="endereco" placeholder="Rua Major José Inácio, 2154">
+                <label>Vigência</label>
+                <input type="text" name="vigencia" placeholder="Ex: 30 dias">
             </div>
-            <div class="duas-colunas">
+
+            <div class="campo">
+                <label>Requisitos da Contratação</label>
+                <textarea name="requisitos" rows="4" placeholder="Ex: Estrutura resistente, materiais duráveis..."></textarea>
+            </div>
+
+            <div class="campo">
+                <label>Endereço de Entrega</label>
+                <input type="text" name="endereco" placeholder="Ex: Rua São Sebastião, 2828 – Vila Nery">
+            </div>
+
+            <div class="campo">
+                <label>Critérios de Recebimento / Aceitação</label>
+                <textarea name="criterios" rows="3" placeholder="Ex: Recebimento provisório em X dias, definitivo em Y dias úteis..."></textarea>
+            </div>
+
+            <!-- tabela do item -->
+            <div class="sub-titulo" style="margin-top:24px;">Item da Tabela</div>
+            <div class="tres-colunas">
                 <div class="campo">
-                    <label>Valor em Risco (R$)</label>
-                    <input type="text" name="valor_risco" placeholder="Ex: 2000000,00">
+                    <label>Especificação do Item</label>
+                    <textarea name="especificacao" rows="3" placeholder="Ex: Registro tipo gaveta 3 polegadas..."></textarea>
                 </div>
                 <div class="campo">
-                    <label>Vigência</label>
-                    <input type="text" name="vigencia" placeholder="Ex: 12 meses">
+                    <label>Unidade</label>
+                    <input type="text" name="unidade" placeholder="Ex: Un.">
+                </div>
+                <div class="campo">
+                    <label>Quantidade</label>
+                    <input type="text" name="quantidade" placeholder="Ex: 02">
                 </div>
             </div>
             <div class="campo">
-                <label>Coberturas</label>
-                <textarea name="coberturas" rows="3" placeholder="Descreva as coberturas..."></textarea>
+                <label>Total</label>
+                <input type="text" name="total" placeholder="Ex: 02">
             </div>
-            <div class="campo">
-                <label>Requisitos Específicos</label>
-                <textarea name="requisitos" rows="3" placeholder="Ex: garantias, condições..."></textarea>
-            </div>
-            <div class="campo">
-                <label>Critérios de Aceitação</label>
-                <textarea name="criterios" rows="3" placeholder="Como será aceito o serviço?"></textarea>
-            </div>
-            <div class="duas-colunas">
+
+            <div class="duas-colunas" style="margin-top:8px;">
                 <div class="campo">
                     <label>Data (por extenso)</label>
-                    <input type="text" name="data" placeholder="São Carlos, 29 de janeiro de 2026">
+                    <input type="text" name="data" placeholder="São Carlos, 11 de fevereiro de 2026">
                 </div>
                 <div class="campo">
                     <label>Agente Responsável</label>
-                    <input type="text" name="agente" placeholder="Nome do responsável">
+                    <input type="text" name="agente" placeholder="Ex: Alexandro Garbim">
                 </div>
+            </div>
+            <div class="campo">
+                <label>Cargo (para assinatura)</label>
+                <input type="text" name="cargo" value="Diretor Administrativo">
             </div>
 
             <div class="botoes">
@@ -430,21 +457,42 @@
     var carregados = { dfd: false, etp: false, tr: false };
 
     // mapeamento campo do form -> placeholder no docx
+    // lado esquerdo: name do input HTML | lado direito: chave {exata} no .docx
     var campos = {
         dfd: {
-            agente: 'agente', setor: 'setor', processo: 'processo',
-            objeto: 'objeto', justificativa: 'justificativa',
-            especificacoes: 'especificações', data: 'data', cargo: 'cargo'
+            agente: 'agente',
+            setor: 'setor',
+            processo: 'processo',
+            objeto: 'objeto',
+            justificativa: 'justificativa',
+            especificacoes: 'especificações',
+            data: 'data',
+            cargo: 'cargo'
         },
         etp: {
-            introducao: 'introducao', objeto: 'objeto', justificativa: 'justificativa',
-            requisitos: 'requisitos', valor_estimado: 'valor-estimado',
-            prazo_execucao: 'prazo-execucao', data: 'data', agente: 'agente'
+            introducao: 'introducao',
+            objeto: 'objeto',
+            justificativa: 'justificativa',
+            requisitos: 'requisitos',
+            valor_estimado: 'valor-estimado',
+            prazo_execucao: 'prazo-execucao',
+            data: 'data',
+            agente: 'agente'
         },
         tr: {
-            objeto: 'objeto', endereco: 'endereco', valor_risco: 'valor-risco',
-            vigencia: 'vigencia', coberturas: 'coberturas', requisitos: 'requisitos',
-            criterios: 'criterios', data: 'data', agente: 'agente'
+            // chaves exatas encontradas no TR.docx
+            resumo_contratacao: 'resumo_contratacao',
+            vigencia: 'vigencia',
+            requisitos: 'requisitos',
+            endereco: 'endereço',       // atenção: acento no docx
+            criterios: 'criterios',
+            especificacao: 'especificacao',
+            unidade: 'unidade',
+            quantidade: 'quantidade',
+            total: 'total',
+            data: 'data',
+            agente: 'agente',
+            cargo: 'cargo'
         }
     };
 
@@ -472,7 +520,7 @@
         leitor.readAsArrayBuffer(arquivo);
     }
 
-    // tenta buscar o template da pasta /templates automaticamente (só funciona em http://)
+    // tenta buscar o template automaticamente via raw do GitHub (sem problema de CORS)
     async function carregarTemplate(tipo, caminho) {
         try {
             var r = await fetch(caminho);
@@ -486,7 +534,7 @@
             span.textContent = '✅ ' + tipo.toUpperCase() + '.docx (automático)';
             span.classList.add('ok');
         } catch(e) {
-            // falhou, provavelmente rodando em file:// — sem problema, usuário seleciona manualmente
+            // falhou — usuário seleciona manualmente pelo seletor de arquivo
             document.getElementById('erro-' + tipo).style.display = 'block';
         }
     }
@@ -573,6 +621,6 @@
     }
 </script>
 
-<!-- templates ficam em /templates/DFD.docx, ETP.docx, TR.docx -->
+<!-- templates em /templates/DFD.docx, ETP.docx, TR.docx -->
 </body>
 </html>
