@@ -114,7 +114,8 @@
         }
 
         .campo input,
-        .campo textarea {
+        .campo textarea,
+        .campo select {
             width: 100%;
             padding: 10px 12px;
             border: 1px solid var(--borda);
@@ -125,7 +126,8 @@
         }
 
         .campo input:focus,
-        .campo textarea:focus {
+        .campo textarea:focus,
+        .campo select:focus {
             border-color: var(--azul);
             outline: none;
             box-shadow: 0 0 0 3px rgba(2,117,197,0.12);
@@ -401,7 +403,6 @@
                 <textarea name="criterios" rows="3" placeholder="Ex: Recebimento provisório em X dias, definitivo em Y dias úteis..."></textarea>
             </div>
 
-            <!-- tabela do item -->
             <div class="sub-titulo" style="margin-top:24px;">Item da Tabela</div>
             <div class="tres-colunas">
                 <div class="campo">
@@ -421,13 +422,13 @@
                 <label>Total</label>
                 <input type="text" name="total" placeholder="Ex: 02">
             </div>
-	    <div class="campo">
+            <div class="campo">
                 <label>Tipo de Contratação</label>
                 <select name="tipo">
-                <option value="bens">Bens</option>
-                <option value="servicos">Serviços</option>
-              </select>
-          </div>
+                    <option value="bens">Bens</option>
+                    <option value="servicos">Serviços</option>
+                </select>
+            </div>
             <div class="duas-colunas" style="margin-top:8px;">
                 <div class="campo">
                     <label>Data (por extenso)</label>
@@ -440,9 +441,8 @@
             </div>
             <div class="campo">
                 <label>Cargo (para assinatura)</label>
-                <input type="text" name="cargo" value="Ex: Diretor Administrativo">
+                <input type="text" name="cargo" placeholder="Ex: Diretor Administrativo">
             </div>
-	    
 
             <div class="botoes">
                 <button type="button" class="btn btn-gerar" onclick="gerarDoc('tr')">Gerar TR</button>
@@ -459,12 +459,9 @@
 </footer>
 
 <script>
-    // guarda os binários dos templates carregados
     var templates = { dfd: null, etp: null, tr: null };
     var carregados = { dfd: false, etp: false, tr: false };
 
-    // mapeamento campo do form -> placeholder no docx
-    // lado esquerdo: name do input HTML | lado direito: chave {exata} no .docx
     var campos = {
         dfd: {
             agente: 'agente',
@@ -485,13 +482,13 @@
             prazo_execucao: 'prazo-execucao',
             data: 'data',
             agente: 'agente'
+			
         },
         tr: {
-            // chaves exatas encontradas no TR.docx
             resumo_contratacao: 'resumo_contratacao',
             vigencia: 'vigencia',
             requisitos: 'requisitos',
-            endereco: 'endereço',       // atenção: acento no docx
+            endereco: 'endereço',
             criterios: 'criterios',
             especificacao: 'especificacao',
             unidade: 'unidade',
@@ -527,7 +524,6 @@
         leitor.readAsArrayBuffer(arquivo);
     }
 
-    // tenta buscar o template automaticamente via raw do GitHub (sem problema de CORS)
     async function carregarTemplate(tipo, caminho) {
         try {
             var r = await fetch(caminho);
@@ -541,7 +537,6 @@
             span.textContent = '✅ ' + tipo.toUpperCase() + '.docx (automático)';
             span.classList.add('ok');
         } catch(e) {
-            // falhou — usuário seleciona manualmente pelo seletor de arquivo
             document.getElementById('erro-' + tipo).style.display = 'block';
         }
     }
@@ -582,7 +577,6 @@
         try {
             var formData = Object.fromEntries(new FormData(document.getElementById('form-' + tipo)));
 
-            // monta o objeto que vai pro template
             var dados = {};
             for (var campo in campos[tipo]) {
                 dados[campos[tipo][campo]] = formData[campo] || '';
@@ -628,6 +622,5 @@
     }
 </script>
 
-<!-- templates em /templates/DFD.docx, ETP.docx, TR.docx -->
 </body>
 </html>
