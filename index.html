@@ -357,6 +357,46 @@
                 </div>
             </div>
 
+            <!-- NOVOS CAMPOS -->
+            <div class="campo">
+                <label>Descrição da Necessidade</label>
+                <textarea name="descricao_necessidade" rows="4" placeholder="Descreva a necessidade que originou esta contratação..."></textarea>
+            </div>
+            <div class="duas-colunas">
+                <div class="campo">
+                    <label>Estimativa de Quantidades</label>
+                    <textarea name="estimativa_quantidades" rows="3" placeholder="Ex: 10 unidades, baseado em consumo histórico de..."></textarea>
+                </div>
+                <div class="campo">
+                    <label>Estimativa de Valores</label>
+                    <textarea name="estimativa_valores" rows="3" placeholder="Ex: R$ 5.000,00, conforme pesquisa de mercado..."></textarea>
+                </div>
+            </div>
+            <div class="campo">
+                <label>Parcelamento da Contratação</label>
+                <select name="parcelamento">
+                    <option value="nao_aplicavel">Não se aplica</option>
+                    <option value="parcelado">Parcelado</option>
+                    <option value="nao_parcelado">Não parcelado</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>Justificativa sobre Parcelamento</label>
+                <textarea name="justificativa_parcelamento" rows="3" placeholder="Justifique a decisão sobre parcelamento..."></textarea>
+            </div>
+            <div class="campo">
+                <label>Viabilidade da Contratação</label>
+                <select name="viabilidade">
+                    <option value="viavel">Viável</option>
+                    <option value="nao_viavel">Não Viável</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>Manifestação sobre Viabilidade</label>
+                <textarea name="manifestacao_viabilidade" rows="3" placeholder="Manifeste-se sobre a viabilidade técnica e econômica da contratação..."></textarea>
+            </div>
+            <!-- FIM NOVOS CAMPOS -->
+
             <div class="botoes">
                 <button type="button" class="btn btn-gerar" onclick="gerarDoc('etp')">Gerar ETP</button>
                 <button type="reset" class="btn btn-limpar">Limpar</button>
@@ -481,8 +521,14 @@
             valor_estimado: 'valor-estimado',
             prazo_execucao: 'prazo-execucao',
             data: 'data',
-            agente: 'agente'
-			
+            agente: 'agente',
+            descricao_necessidade: 'descricao_necessidade',
+            estimativa_quantidades: 'estimativa_quantidades',
+            estimativa_valores: 'estimativa_valores',
+            parcelamento: 'parcelamento',
+            justificativa_parcelamento: 'justificativa_parcelamento',
+            viabilidade: 'viabilidade',
+            manifestacao_viabilidade: 'manifestacao_viabilidade'
         },
         tr: {
             resumo_contratacao: 'resumo_contratacao',
