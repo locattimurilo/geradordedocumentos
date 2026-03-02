@@ -356,8 +356,6 @@
                     <input type="text" name="agente" placeholder="Nome do responsável">
                 </div>
             </div>
-
-            <!-- NOVOS CAMPOS -->
             <div class="campo">
                 <label>Descrição da Necessidade</label>
                 <textarea name="descricao_necessidade" rows="4" placeholder="Descreva a necessidade que originou esta contratação..."></textarea>
@@ -394,6 +392,18 @@
             <div class="campo">
                 <label>Manifestação sobre Viabilidade</label>
                 <textarea name="manifestacao_viabilidade" rows="3" placeholder="Manifeste-se sobre a viabilidade técnica e econômica da contratação..."></textarea>
+            </div>
+
+            <!-- NOVOS CAMPOS: Solicitante e Setor -->
+            <div class="duas-colunas">
+                <div class="campo">
+                    <label>Solicitante</label>
+                    <input type="text" name="solicitante" placeholder="Nome do solicitante">
+                </div>
+                <div class="campo">
+                    <label>Setor</label>
+                    <input type="text" name="setor" placeholder="Ex: Diretoria Administrativa">
+                </div>
             </div>
             <!-- FIM NOVOS CAMPOS -->
 
@@ -528,7 +538,9 @@
             parcelamento: 'parcelamento',
             justificativa_parcelamento: 'justificativa_parcelamento',
             viabilidade: 'viabilidade',
-            manifestacao_viabilidade: 'manifestacao_viabilidade'
+            manifestacao_viabilidade: 'manifestacao_viabilidade',
+            solicitante: 'solicitante',
+            setor: 'setor'
         },
         tr: {
             resumo_contratacao: 'resumo_contratacao',
