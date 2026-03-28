@@ -1,0 +1,80 @@
+<div id="erro-tr" class="erro-template">
+    Não foi possível carregar o template TR automaticamente. Selecione o arquivo abaixo.
+</div>
+
+<div class="upload-linha">
+    <label for="file-tr">📄 Template TR:</label>
+    <input type="file" id="file-tr" accept=".docx" onchange="lidarArquivo('tr')">
+    <span id="status-tr" class="upload-status">Nenhum arquivo selecionado</span>
+</div>
+
+<form id="form-tr">
+    <div class="sub-titulo">Termo de Referência</div>
+
+    <div class="campo">
+        <label>Resumo da Contratação (item 1.1)</label>
+        <textarea name="resumo_contratacao" rows="3" placeholder="Ex: Aquisição de item X com tamanho Y e etc..."></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Vigência</label>
+        <input type="text" name="vigencia" placeholder="Ex: 30 dias">
+    </div>
+
+    <div class="campo">
+        <label>Requisitos da Contratação</label>
+        <textarea name="requisitos" rows="4" placeholder="Ex: Estrutura resistente, materiais duráveis..."></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Endereço de Entrega</label>
+        <input type="text" name="endereco" placeholder="Ex: Rua São Sebastião, 2828 – Vila Nery">
+    </div>
+
+    <div class="campo">
+        <label>Critérios de Recebimento / Aceitação</label>
+        <textarea name="criterios" rows="3" placeholder="Ex: Recebimento provisório em X dias, definitivo em Y dias úteis..."></textarea>
+    </div>
+
+    <div class="sub-titulo" style="margin-top:24px;">
+        Itens da Tabela
+        <button
+            type="button"
+            onclick="adicionarItemTR()"
+            style="margin-left:14px;padding:4px 14px;background:var(--azul);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">
+            + Adicionar Item
+        </button>
+    </div>
+
+    <div id="lista-itens-tr"></div>
+
+    <div class="campo" style="margin-top:20px;">
+        <label>Tipo de Contratação</label>
+        <select name="tipo">
+            <option value="bens">Bens</option>
+            <option value="servicos">Serviços</option>
+        </select>
+    </div>
+
+    <div class="duas-colunas" style="margin-top:8px;">
+        <div class="campo">
+            <label>Data (por extenso)</label>
+            <input type="text" name="data" placeholder="Ex: São Carlos, 28 de março de 2026">
+        </div>
+        <div class="campo">
+            <label>Agente Responsável</label>
+            <input type="text" name="agente" placeholder="NOME COMPLETO DO SOLICITANTE">
+        </div>
+    </div>
+
+    <div class="campo">
+        <label>Cargo (para assinatura)</label>
+        <input type="text" name="cargo" placeholder="Ex: Diretor Administrativo">
+    </div>
+
+    <div class="botoes">
+        <button type="button" class="btn btn-gerar" onclick="gerarDoc('tr')">Gerar TR</button>
+        <button type="button" class="btn btn-limpar" onclick="resetarItensTR()">Limpar</button>
+        <span id="load-tr" class="loading">Processando</span>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Documentos Administrativos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/pizzip@3.1.4/dist/pizzip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docxtemplater@3.42.1/build/docxtemplater.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+</head>
+<body>
+
+<div class="cabecalho">
+    <h1>Gerador de Documentos Administrativos</h1>
+</div>
+
+<h2 class="titulo">Gerador de Documentos</h2>
+
+<div class="card">
+    <div class="card-header">Escolha o tipo</div>
+
+    <div class="abas">
+        <button class="aba ativa" onclick="mudarAba(event, 'dfd')">DFD</button>
+        <button class="aba"       onclick="mudarAba(event, 'etp')">ETP</button>
+        <button class="aba"       onclick="mudarAba(event, 'tr')">TERMO DE REFERÊNCIA</button>
+    </div>
+
+    <div id="dfd" class="painel ativo">
+        <p style="color:#999; font-size:14px; text-align:center;">Carregando formulário DFD...</p>
+    </div>
+    <div id="etp" class="painel"></div>
+    <div id="tr" class="painel"></div>
+</div>
+
+<footer>
+    <p>Este projeto foi desenvolvido de forma independente, para fins de estudo e automação de rotinas administrativas.</p>
+    <p>Não representa sistema oficial de nenhum órgão do poder público.</p>
+</footer>
+
+<script src="gerador.js"></script>
+
+</body>
+</html>

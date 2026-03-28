@@ -1,0 +1,117 @@
+<!-- ETP.html – fragmento: só o conteúdo do painel, sem <html>/<head>/<body> -->
+
+<div id="erro-etp" class="erro-template">
+    <i>Não foi possível carregar o template ETP automaticamente. Selecione o arquivo abaixo.</i>
+</div>
+
+<div class="upload-linha">
+    <label for="file-etp">📄 Template ETP:</label>
+    <input type="file" id="file-etp" accept=".docx" onchange="lidarArquivo('etp')">
+    <span id="status-etp" class="upload-status">Nenhum arquivo selecionado</span>
+</div>
+
+<form id="form-etp">
+    <div class="sub-titulo">Estudo Técnico Preliminar</div>
+
+    <div class="campo">
+        <label>Introdução</label>
+        <textarea name="introducao" rows="3" placeholder="Contexto e objetivos..."></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Objeto da Contratação</label>
+        <textarea name="objeto" rows="3" placeholder="Descreva o objeto..."></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Justificativa</label>
+        <textarea name="justificativa" rows="4" placeholder="Por que contratar?"></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Requisitos Técnicos</label>
+        <textarea name="requisitos" rows="4" placeholder="Ex: normas, certificações..."></textarea>
+    </div>
+
+    <div class="duas-colunas">
+        <div class="campo">
+            <label>Valor Estimado (R$)</label>
+            <input type="text" name="valor_estimado" placeholder="Ex: 15000,00">
+        </div>
+        <div class="campo">
+            <label>Prazo de Execução</label>
+            <input type="text" name="prazo_execucao" placeholder="Ex: 30 dias">
+        </div>
+    </div>
+
+    <div class="duas-colunas">
+        <div class="campo">
+            <label>Data (por extenso)</label>
+            <input type="text" name="data" placeholder="São Carlos, 29 de janeiro de 2026">
+        </div>
+        <div class="campo">
+            <label>Agente Responsável</label>
+            <input type="text" name="agente" placeholder="Nome do responsável">
+        </div>
+    </div>
+
+    <div class="campo">
+        <label>Descrição da Necessidade</label>
+        <textarea name="descricao_necessidade" rows="4" placeholder="Descreva a necessidade que originou esta contratação..."></textarea>
+    </div>
+
+    <div class="duas-colunas">
+        <div class="campo">
+            <label>Estimativa de Quantidades</label>
+            <textarea name="estimativa_quantidade" rows="3" placeholder="Ex: 10 unidades, baseado em consumo histórico de..."></textarea>
+        </div>
+        <div class="campo">
+            <label>Estimativa de Valores</label>
+            <textarea name="estimativa_valores" rows="3" placeholder="Ex: R$ 5.000,00, conforme pesquisa de mercado..."></textarea>
+        </div>
+    </div>
+
+    <div class="campo">
+        <label>Parcelamento da Contratação</label>
+        <select name="parcelamento">
+            <option value="Não se aplica">Não se aplica</option>
+            <option value="Parcelado">Parcelado</option>
+            <option value="Não parcelado">Não parcelado</option>
+        </select>
+    </div>
+
+    <div class="campo">
+        <label>Justificativa sobre Parcelamento</label>
+        <textarea name="justificativa_parcelamento" rows="3" placeholder="Justifique a decisão sobre parcelamento..."></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Viabilidade da Contratação</label>
+        <select name="viabilidade">
+            <option value="Viável">Viável</option>
+            <option value="Não Viável">Não Viável</option>
+        </select>
+    </div>
+
+    <div class="campo">
+        <label>Manifestação sobre Viabilidade</label>
+        <textarea name="manifestacao" rows="3" placeholder="Manifeste-se sobre a viabilidade técnica e econômica da contratação..."></textarea>
+    </div>
+
+    <div class="duas-colunas">
+        <div class="campo">
+            <label>Solicitante</label>
+            <input type="text" name="solicitante" placeholder="Nome do solicitante">
+        </div>
+        <div class="campo">
+            <label>Setor</label>
+            <input type="text" name="setor" placeholder="Ex: Diretoria Administrativa">
+        </div>
+    </div>
+
+    <div class="botoes">
+        <button type="button" class="btn btn-gerar" onclick="gerarDoc('etp')">Gerar ETP</button>
+        <button type="reset" class="btn btn-limpar">Limpar</button>
+        <span id="load-etp" class="loading">Processando</span>
+    </div>
+</form>

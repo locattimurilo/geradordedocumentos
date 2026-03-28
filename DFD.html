@@ -1,0 +1,138 @@
+<!-- DFD.html – fragmento: só o conteúdo do painel, sem <html>/<head>/<body> -->
+
+<div id="erro-dfd" class="erro-template"><i>
+    Não foi possível carregar o template DFD automaticamente. Selecione o arquivo abaixo.
+</i></div>
+
+<div class="upload-linha">
+    <label for="file-dfd">📄 Template DFD:</label>
+    <input type="file" id="file-dfd" accept=".docx" onchange="lidarArquivo('dfd')">
+    <span id="status-dfd" class="upload-status">Nenhum arquivo selecionado</span>
+</div>
+
+<form id="form-dfd">
+    <div class="sub-titulo">Documento de Formalização da Demanda</div>
+
+    <div class="campo">
+        <label>Agente Responsável</label>
+        <input type="text" name="agente" placeholder="NOME COMPLETO DE QUEM SOLICITOU" required>
+    </div>
+
+    <div class="campo">
+        <label>Setor Requisitante</label>
+        <input type="text" name="setor" placeholder="Ex: Diretoria Administrativa" required>
+    </div>
+
+    <div class="campo">
+        <label>Nº do Processo Administrativo</label>
+        <input type="text" name="processo" placeholder="Ex: 2026/00001" required>
+    </div>
+
+    <div class="campo">
+        <label>Dotações</label>
+        <select name="dotacao">
+            <option value="" disabled selected>Selecione a dotação</option>
+            <optgroup label="MATERIAL DE CONSUMO">
+                <option value="9 - 27.01.04.122.4000.2.400.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">9 - 27.01.04.122.4000.2.400.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="10 - 27.01.04.122.4000.2.400.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">10 - 27.01.04.122.4000.2.400.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="28 - 27.01.11.334.4002.2.402.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">28 - 27.01.11.334.4002.2.402.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="29 - 27.01.11.334.4002.2.402.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">29 - 27.01.11.334.4002.2.402.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="38 - 27.01.12.366.4001.2.401.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">38 - 27.01.12.366.4001.2.401.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="39 - 27.01.12.366.4001.2.401.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">39 - 27.01.12.366.4001.2.401.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="51 - 27.01.12.366.4003.2.403.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">51 - 27.01.12.366.4003.2.403.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="52 - 27.01.12.366.4003.2.403.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">52 - 27.01.12.366.4003.2.403.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="61 - 27.01.12.366.4005.2.405.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">61 - 27.01.12.366.4005.2.405.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="62 - 27.01.12.366.4005.2.405.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">62 - 27.01.12.366.4005.2.405.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="71 - 27.01.12.368.4007.2.407.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">71 - 27.01.12.368.4007.2.407.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="72 - 27.01.12.368.4007.2.407.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">72 - 27.01.12.368.4007.2.407.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="84 - 27.01.27.812.4004.2.404.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">84 - 27.01.27.812.4004.2.404.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="85 - 27.01.27.812.4004.2.404.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">85 - 27.01.27.812.4004.2.404.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="95 - 27.01.27.812.4006.2.406.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">95 - 27.01.27.812.4006.2.406.3.3.90.30.01.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+                <option value="96 - 27.01.27.812.4006.2.406.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO">96 - 27.01.27.812.4006.2.406.3.3.90.30.04.1100000 Natureza de Despesa: 339030 - MATERIAL DE CONSUMO</option>
+            </optgroup>
+            <optgroup label="SERVIÇOS">
+                <option value="17 - 27.01.04.122.4000.2.400.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">17 - 27.01.04.122.4000.2.400.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="18 - 27.01.04.122.4000.2.400.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">18 - 27.01.04.122.4000.2.400.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="32 - 27.01.11.334.4002.2.402.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">32 - 27.01.11.334.4002.2.402.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="33 - 27.01.11.334.4002.2.402.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">33 - 27.01.11.334.4002.2.402.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="42 - 27.01.12.366.4001.2.401.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">42 - 27.01.12.366.4001.2.401.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="43 - 27.01.12.366.4001.2.401.3.3.90.39.02.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">43 - 27.01.12.366.4001.2.401.3.3.90.39.02.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="44 - 27.01.12.366.4001.2.401.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">44 - 27.01.12.366.4001.2.401.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="55 - 27.01.12.366.4003.2.403.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">55 - 27.01.12.366.4003.2.403.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="56 - 27.01.12.366.4003.2.403.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">56 - 27.01.12.366.4003.2.403.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="65 - 27.01.12.366.4005.2.405.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">65 - 27.01.12.366.4005.2.405.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="66 - 27.01.12.366.4005.2.405.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">66 - 27.01.12.366.4005.2.405.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="75 - 27.01.12.368.4007.2.407.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">75 - 27.01.12.368.4007.2.407.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="76 - 27.01.12.368.4007.2.407.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">76 - 27.01.12.368.4007.2.407.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="88 - 27.01.27.812.4004.2.404.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">88 - 27.01.27.812.4004.2.404.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="89 - 27.01.27.812.4004.2.404.3.3.90.39.04.0000000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">89 - 27.01.27.812.4004.2.404.3.3.90.39.04.0000000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="90 - 27.01.27.812.4004.2.404.3.3.90.39.08.0000000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">90 - 27.01.27.812.4004.2.404.3.3.90.39.08.0000000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="99 - 27.01.27.812.4006.2.406.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">99 - 27.01.27.812.4006.2.406.3.3.90.39.01.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+                <option value="100 - 27.01.27.812.4006.2.406.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA">100 - 27.01.27.812.4006.2.406.3.3.90.39.04.1100000 Natureza de Despesa: 339039 - OUTROS SERVIÇOS DE TERCEIROS - PESSOA JURÍDICA</option>
+            </optgroup>
+            <optgroup label="EQUIPAMENTO PERMANENTE">
+                <option value="26 - 27.01.04.122.4000.2.400.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">26 - 27.01.04.122.4000.2.400.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="27 - 27.01.04.122.4000.2.400.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">27 - 27.01.04.122.4000.2.400.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="34 - 27.01.11.334.4002.2.402.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">34 - 27.01.11.334.4002.2.402.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="35 - 27.01.11.334.4002.2.402.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">35 - 27.01.11.334.4002.2.402.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="47 - 27.01.12.366.4001.2.401.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">47 - 27.01.12.366.4001.2.401.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="48 - 27.01.12.366.4001.2.401.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">48 - 27.01.12.366.4001.2.401.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="59 - 27.01.12.366.4003.2.403.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">59 - 27.01.12.366.4003.2.403.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="60 - 27.01.12.366.4003.2.403.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">60 - 27.01.12.366.4003.2.403.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="67 - 27.01.12.366.4005.2.405.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">67 - 27.01.12.366.4005.2.405.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="68 - 27.01.12.366.4005.2.405.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">68 - 27.01.12.366.4005.2.405.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="79 - 27.01.12.368.4007.2.407.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">79 - 27.01.12.368.4007.2.407.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="80 - 27.01.12.368.4007.2.407.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">80 - 27.01.12.368.4007.2.407.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="81 - 27.01.12.368.4007.2.407.4.4.90.52.08.0000000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">81 - 27.01.12.368.4007.2.407.4.4.90.52.08.0000000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="93 - 27.01.27.812.4004.2.404.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">93 - 27.01.27.812.4004.2.404.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="94 - 27.01.27.812.4004.2.404.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">94 - 27.01.27.812.4004.2.404.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="101 - 27.01.27.812.4006.2.406.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">101 - 27.01.27.812.4006.2.406.4.4.90.52.01.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+                <option value="102 - 27.01.27.812.4006.2.406.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE">102 - 27.01.27.812.4006.2.406.4.4.90.52.04.1100000 Natureza de Despesa: 449052 - EQUIPAMENTOS E MATERIAL PERMANENTE</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="campo">
+        <label>Fonte de Recurso</label>
+        <select name="fonte_recurso">
+            <option value="" disabled selected>Selecione a fonte</option>
+            <option value="01 - TESOURO">01 - TESOURO</option>
+            <option value="04 - RECURSOS PRÓPRIOS DA FESC">04 - RECURSOS PRÓPRIOS DA FESC</option>
+            <option value="0X - EMENDA PARLAMENTAR">0X - EMENDA PARLAMENTAR</option>
+        </select>
+    </div>
+
+    <div class="campo">
+        <label>Objeto da Contratação</label>
+        <textarea name="objeto" rows="3" placeholder="Descreva o objeto"></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Justificativa</label>
+        <textarea name="justificativa" rows="4" placeholder="Justifique a necessidade"></textarea>
+    </div>
+
+    <div class="campo">
+        <label>Especificações do Objeto</label>
+        <textarea name="especificacoes" rows="4" placeholder="Faça um detalhamento técnico"></textarea>
+    </div>
+
+    <div class="duas-colunas">
+        <div class="campo">
+            <label>Data (por extenso)</label>
+            <input type="text" name="data" placeholder="São Carlos, 29 de janeiro de 2026">
+        </div>
+        <div class="campo">
+            <label>Cargo (para assinatura)</label>
+            <input type="text" name="cargo" value="Digite seu cargo ou do responsável">
+        </div>
+    </div>
+
+    <p style="font-size:12px; color:#999;">* Setor e agente serão usados na assinatura.</p>
+
+    <div class="botoes">
+        <button type="button" class="btn btn-gerar" onclick="gerarDoc('dfd')">Gerar DFD</button>
+        <button type="reset" class="btn btn-limpar">Limpar</button>
+        <span id="load-dfd" class="loading">Processando</span>
+    </div>
+</form>

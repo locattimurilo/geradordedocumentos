@@ -1,0 +1,244 @@
+:root {
+    --azul: #0275C5;
+    --azul-escuro: #015ea0;
+    --fundo: #f3f6fb;
+    --borda: #e4e8ef;
+    --texto: #2c2f36;
+    --cinza: #6b7280;
+    --verde: #1e8e3e;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+}
+
+/* ── Cabeçalho ── */
+.cabecalho {
+    background: var(--azul);
+    padding: 22px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cabecalho h1 {
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* ── Card / Título ── */
+h2.titulo {
+    max-width: 1100px;
+    margin: 30px auto 10px;
+    padding: 0 20px;
+    font-size: 26px;
+    color: var(--azul);
+    font-weight: 500;
+}
+.card {
+    max-width: 1100px;
+    margin: 20px auto 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+.card-header {
+    background: var(--azul);
+    color: white;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ── Abas ── */
+.abas {
+    display: flex;
+    border-bottom: 1px solid var(--borda);
+    background: #fff;
+}
+.aba {
+    padding: 12px 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--cinza);
+    border-bottom: 3px solid transparent;
+    font-size: 15px;
+}
+.aba.ativa {
+    border-bottom-color: var(--azul);
+    color: var(--azul);
+}
+
+/* ── Painéis ── */
+.painel { display: none; padding: 25px; }
+.painel.ativo { display: block; }
+
+/* ── Formulário ── */
+.sub-titulo {
+    color: var(--azul);
+    font-size: 17px;
+    margin: 20px 0 15px;
+    font-weight: 600;
+}
+.campo { margin-bottom: 18px; }
+.campo label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--cinza);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+.campo input,
+.campo textarea,
+.campo select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    font-size: 14px;
+    background: #fff;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+    border-color: var(--azul);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(2,117,197,0.12);
+}
+
+/* ── Grids de colunas ── */
+.duas-colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.tres-colunas {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+}
+
+/* ── Upload ── */
+.upload-linha {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #eaf3fb;
+    border: 1px dashed var(--azul);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+}
+.upload-linha label {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--azul);
+    white-space: nowrap;
+}
+.upload-linha input[type=file] {
+    font-size: 13px;
+    flex: 1;
+}
+.upload-status {
+    font-size: 13px;
+    color: var(--cinza);
+    white-space: nowrap;
+}
+.upload-status.ok {
+    color: var(--verde);
+    font-weight: 600;
+}
+
+/* ── Botões ── */
+.botoes {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.btn {
+    padding: 11px 26px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+.btn-gerar { background: var(--azul); color: white; }
+.btn-gerar:hover { background: var(--azul-escuro); }
+.btn-limpar { background: #d1d5db; color: #111; }
+.btn-limpar:hover { background: #b8bec7; }
+
+/* ── Estados ── */
+.loading {
+    display: none;
+    color: var(--azul);
+    font-weight: 600;
+    font-size: 14px;
+}
+.erro-template {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    display: none;
+}
+
+/* ── Rodapé ── */
+footer {
+    background: var(--azul);
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 13px;
+    margin-top: 40px;
+    line-height: 1.7;
+}
+footer p + p {
+    margin-top: 4px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+}
+.item-tr {
+        background: #f8fafd;
+        border: 1px solid var(--borda);
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+        position: relative;
+    }
+    .item-tr .item-numero {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--azul);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+    }
+    .item-tr .btn-remover {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        background: #fee2e2;
+        color: #b91c1c;
+        border: none;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .item-tr .btn-remover:hover { background: #fca5a5; }
