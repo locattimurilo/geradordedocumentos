@@ -26,7 +26,7 @@
 
 ## 🧠 A origem do problema
 
-Trabalhando por anos na administração pública, acompanhei de perto um problema silencioso e cotidiano: servidores refazendo os mesmos documentos do zero, repetidamente.
+Com a nova legislação 14133/25, acompanhei de perto um problema silencioso e cotidiano: servidores refazendo os mesmos documentos do zero, repetidamente.
 
 DFD, ETP, Termo de Referência — estrutura sempre igual, campos diferentes, e margem enorme para erro humano. Horas gastas em formatação, numeração e adequação legal que poderiam ser usadas em atividades mais estratégicas.
 
@@ -108,7 +108,7 @@ A aplicação funciona **100% no navegador do usuário**.
 
 **Murilo Locatti**
 🎓 Estudante de Big Data · FATEC São Carlos
-
+Licença: GNU 🦬
 <p>
   <a href="https://www.linkedin.com/in/murilo-locatti-cavalho-36b03a140/">
     <img src="https://img.shields.io/badge/LinkedIn-006192?style=for-the-badge&logo=linkedin&logoColor=white">
